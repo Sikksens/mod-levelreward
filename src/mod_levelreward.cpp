@@ -89,12 +89,12 @@ private:
     void LoadLevelOptions(int index)
     {
         uint32 level = (index + 1) * 10;
-        levelRewardGold[index] = sConfigMgr->GetOption<uint32>(Acore::StringFormat("LevelReward.Level.%i.Money", level), 0);
-        levelRewardMailSubject[index] = sConfigMgr->GetOption<std::string>(Acore::StringFormat("LevelReward.Level.%i.Mail.Subject", level), Acore::StringFormat("Level %i", level));
-        levelRewardMailBody[index] = sConfigMgr->GetOption<std::string>(Acore::StringFormat("LevelReward.Level.%i.Mail.Body", level), Acore::StringFormat("Congratulations on reaching level %i! Take this reward, let it aid you in your travels.", level));
+        levelRewardGold[index] = sConfigMgr->GetOption<uint32>(Acore::StringFormat("LevelReward.Level.{}.Money", level), 0);
+        levelRewardMailSubject[index] = sConfigMgr->GetOption<std::string>(Acore::StringFormat("LevelReward.Level.{}.Mail.Subject", level), Acore::StringFormat("Level {}", level));
+        levelRewardMailBody[index] = sConfigMgr->GetOption<std::string>(Acore::StringFormat("LevelReward.Level.{}.Mail.Body", level), Acore::StringFormat("Congratulations on reaching level {}! Take this reward, let it aid you in your travels.", level));
 
         int i = levelRewardItems.size();
-        std::string rewardItems(sConfigMgr->GetOption<std::string>(Acore::StringFormat("LevelReward.Level.%i.Items", level), ""));
+        std::string rewardItems(sConfigMgr->GetOption<std::string>(Acore::StringFormat("LevelReward.Level.{}.Items", level), ""));
         for (std::string_view item : Acore::Tokenize(rewardItems, ';', false))
         {
             std::vector<std::string_view> list = Acore::Tokenize(item, ',', false);
